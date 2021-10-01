@@ -1,0 +1,42 @@
+@color: blue;
+@colorWidth: darkorange;
+@margin-left-primary:20px;
+
+.title{
+    color:@color;
+}
+
+@media (max-width: 768px){
+    .title{
+        color:@colorWidth;
+    }
+}
+
+#cajaLista{
+    width:300px;
+}
+
+.listaAlumnos li:nth-child(odd){
+    margin-left: @margin-left-primary;
+}
+
+#alumnoAprobado{
+    .aprobado;
+}
+
+#alumnoSuspenso{
+    .suspenso;
+}
+
+.aprobado{
+    color:green;
+}
+
+.suspenso{
+    color:red;
+}
+
+.top3{
+    font-weight: bold;
+}
+

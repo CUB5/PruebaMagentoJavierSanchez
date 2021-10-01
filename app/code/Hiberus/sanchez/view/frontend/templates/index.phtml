@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * @var \Hiberus\sanchez\Block\Index $block
+ */
+
+$alumnos=$block->getCollection();
+$sumaNotas=0;
+?>
+<fieldset id="cajaLista">
+    <legend><h2 class="title">Alumnos</h2></legend>
+    <ul class="listaAlumnos">
+        <?php
+        foreach($alumnos as $key=>$alumno){
+            $aux[$key]=$alumno;
+            $auxNotas[$key]=$alumno->getMark();
+        }
+        $cont=0;
+        array_multisort($auxNotas, SORT_DESC, $aux);
+        foreach($aux as $alumno){
+            $nota=$alumno->getMark();
+            $sumaNotas=$sumaNotas+$nota;
+            if($nota<5){
+                ?>
+                <li id="alumnoSuspenso">Nombre: <?php echo $alumno->getFirstname()." ".$alumno->getLastname()."-> ".$nota; ?></li>
+                <?php
+            }else{
+                if($cont<3){
+                    ?>
+                    <li id="alumnoAprobado" class="top3">Nombre: <?php echo $alumno->getFirstname()." ".$alumno->getLastname()."-> ".$nota; ?></li>
+                    <?php
+                }else{
+                    ?>
+                    <li id="alumnoAprobado">Nombre: <?php echo $alumno->getFirstname()." ".$alumno->getLastname()."-> ".$nota; ?></li>
+                    <?php
+                }
+            }
+            $cont++;
+        }
+        ?>
+    </ul>
+    <fieldset>
+        <legend><h2>Datos generales</h2></legend>
+        <p>Total number of students: <?php echo count($alumnos) ?> </p>
+        <p>Media de notas: <?php echo round($sumaNotas/count($alumnos), 2); ?></p>
+    </fieldset>
+</fieldset>
